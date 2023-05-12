@@ -16,6 +16,6 @@ export class InfoRouter {
       (this.router = Router()), (this.path = path);
       this.controller = new InfoController(db);
       this.authMiddleware = new AuthMiddlewareClass(db)
-      this.router.post('/getMe', this.authMiddleware.isAuthorized, this.controller.getMe)
+      this.router.get('/getMe', this.authMiddleware.isAuthorized, this.controller.getMe)
     }
   }

@@ -28,6 +28,7 @@ export class InfoController {
         matches: userMatches
      })
     } catch (error) {
+      console.log(error)
       if (error instanceof ErrorGenerator) {
         return res.status(error.status).send(error.message);
       }

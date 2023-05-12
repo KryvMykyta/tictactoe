@@ -25,6 +25,7 @@ export class AuthController {
       const accessToken = this.tokenGenerator.createAccessToken(login)
       return res.status(200).send({accessToken})
     } catch (error) {
+      console.log(error)
       if (error instanceof ErrorGenerator) {
         return res.status(error.status).send(error.message);
       }
@@ -41,11 +42,11 @@ export class AuthController {
       if (!login || !password)
         throw new ErrorGenerator(400, "Login or password is empty");
       const user = this.usersRepo.getUserByLogin(login);
-      if (!user[0])
-        throw new ErrorGenerator(400, "User with this login already exists");
+      if (user[0]) throw new ErrorGenerator(400, "User with this login already exists");
       this.usersRepo.createUser(login, password);
       return res.send("User created");
     } catch (error) {
+      console.log(error)
       if (error instanceof ErrorGenerator) {
         return res.status(error.status).send(error.message);
       }

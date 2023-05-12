@@ -16,7 +16,7 @@ export class UsersRepo {
     }
 
     public createUser = (login: string, password: string) => {
-        this.db.insert(users).values({login, password, rating:0})
+        this.db.insert(users).values({login, password, rating:0}).run()
     }
 
     public getUserMatches = (login: string) => {
