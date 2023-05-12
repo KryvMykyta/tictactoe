@@ -19,9 +19,9 @@ export class AuthController {
     try {
       const { login, password } = req.body;
       if (!login || !password)
-        throw new ErrorGenerator(400, "Login or password is empty");
+        throw new ErrorGenerator(400, "Bad Request");
       const user = this.usersRepo.getUserByLogin(login);
-      if (!user[0] || user[0].password !== password) throw new ErrorGenerator(400, "Wrong credentials");
+      if (!user[0] || user[0].password !== password) throw new ErrorGenerator(401, "Wrong credentials");
       const accessToken = this.tokenGenerator.createAccessToken(login)
       return res.status(200).send({accessToken})
     } catch (error) {
@@ -40,11 +40,12 @@ export class AuthController {
     try {
       const { login, password } = req.body;
       if (!login || !password)
-        throw new ErrorGenerator(400, "Login or password is empty");
+        throw new ErrorGenerator(400, "Bad Request");
       const user = this.usersRepo.getUserByLogin(login);
-      if (user[0]) throw new ErrorGenerator(400, "User with this login already exists");
+      if (user[0]) throw new ErrorGenerator(409, "User with this login already exists");
       this.usersRepo.createUser(login, password);
-      return res.send("User created");
+      const accessToken = this.tokenGenerator.createAccessToken(login)
+      return res.status(200).send({accessToken})
     } catch (error) {
       console.log(error)
       if (error instanceof ErrorGenerator) {
