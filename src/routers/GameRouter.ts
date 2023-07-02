@@ -3,9 +3,9 @@ import dotenv from 'dotenv'
 dotenv.config()
 import { BetterSQLite3Database } from "drizzle-orm/better-sqlite3";
 import { AuthMiddlewareClass } from "middlewares/AuthMiddleware";
-import { GameController } from "./../controllers/GameController";
+import { GameController } from "controllers/GameController";
 
-export class InfoRouter {
+export class GameRouter {
     router: Router;
     path: string;
     controller: GameController;
@@ -14,7 +14,7 @@ export class InfoRouter {
     constructor(path: string, db: BetterSQLite3Database) {
       (this.router = Router()), (this.path = path);
       this.controller = new GameController(db);
-      this.authMiddleware = new AuthMiddlewareClass(db)
-      this.router.get('/createConnection', this.authMiddleware.isAuthorized, this.controller.createConnection)
+      this.authMiddleware = new AuthMiddlewareClass()
+      // this.router.get('/createConnection', this.authMiddleware.isAuthorized, this.controller.createConnection)
     }
   }
