@@ -2,8 +2,8 @@ import { Router } from "express";
 import dotenv from 'dotenv'
 dotenv.config()
 import { BetterSQLite3Database } from "drizzle-orm/better-sqlite3";
-import { AuthMiddlewareClass } from "middlewares/AuthMiddleware";
-import { GameController } from "controllers/GameController";
+import { AuthMiddlewareClass } from "@/middlewares/AuthMiddleware";
+import { GameController } from "@/controllers/GameController";
 
 export class GameRouter {
     router: Router;

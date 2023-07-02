@@ -1,7 +1,6 @@
-import { matches } from './../schemas/matchSchema';
-import { drizzle, BetterSQLite3Database } from "drizzle-orm/better-sqlite3";
-import { Database } from "better-sqlite3";
-import { users } from "./../schemas/userSchema";
+import { matches } from '@/schemas/matchSchema';
+import { BetterSQLite3Database } from "drizzle-orm/better-sqlite3";
+import { users } from "@/schemas/userSchema";
 import { eq, or } from "drizzle-orm";
 
 export class UsersRepo {

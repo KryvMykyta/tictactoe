@@ -1,14 +1,14 @@
-import { BetterSQLite3Database } from "drizzle-orm/better-sqlite3";
 import { Request, Response } from "express";
-import { UsersRepo } from "repositories/UsersRepo";
-import { ErrorGenerator } from "utils/ErrorGenerator";
-import { TokenGenerator } from "utils/Tokens";
+import { UserRepoInstance } from "@/libs/databases";
+import { UsersRepo } from "@/repositories/UsersRepo";
+import { ErrorGenerator } from "@/utils/ErrorGenerator";
+import { TokenGenerator } from "@/utils/Tokens";
 
 export class AuthController {
   usersRepo: UsersRepo;
   tokenGenerator: TokenGenerator
-  constructor(db: BetterSQLite3Database) {
-    this.usersRepo = new UsersRepo(db);
+  constructor() {
+    this.usersRepo = UserRepoInstance
     this.tokenGenerator = new TokenGenerator()
   }
 

@@ -1,6 +1,6 @@
 import jwt from "jsonwebtoken";
 import dotenv from "dotenv";
-import { ErrorGenerator } from "./ErrorGenerator";
+import { ErrorGenerator } from "@/utils/ErrorGenerator";
 dotenv.config();
 
 const secret = process.env.SECRET_KEY as string;

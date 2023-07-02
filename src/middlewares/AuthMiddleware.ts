@@ -1,15 +1,16 @@
 import { NextFunction, Request, RequestHandler, Response } from "express";
-import { ErrorGenerator } from "./../utils/ErrorGenerator";
-import { TokenGenerator } from "./../utils/Tokens";
-import { UsersRepo } from "./../repositories/UsersRepo";
-import { BetterSQLite3Database } from "drizzle-orm/better-sqlite3";
+import { ErrorGenerator } from "@/utils/ErrorGenerator";
+import { TokenGenerator } from "@/utils/Tokens";
+import { UsersRepo } from "@/repositories/UsersRepo";
+import { UserRepoInstance } from "@/libs/databases";
 
 export class AuthMiddlewareClass {
   tokenGenerator: TokenGenerator;
   usersRepository: UsersRepo;
-  constructor(db: BetterSQLite3Database) {
+  constructor() {
     this.tokenGenerator = new TokenGenerator();
-    this.usersRepository = new UsersRepo(db);;
+    // this.usersRepository = new UsersRepo(db);
+    this.usersRepository = UserRepoInstance
   }
 
   public isAuthorized: RequestHandler = async (

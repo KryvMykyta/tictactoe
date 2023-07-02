@@ -6,8 +6,20 @@ export const tableSchema = new mongoose.Schema({
         required: true
     },
     table: {
-        type: [String],
+        type: [[String]],
         required: true
-    }
+    },
+    player1: {
+        type: String,
+        required: true
+    },
+    player2: {
+        type: String,
+        required: true
+    },
+    turn: {
+        type: String,
+        required: true
+    },
 })
-export const table = mongoose.model("tables", tableSchema)
+export const Table = mongoose.model("tables", tableSchema)

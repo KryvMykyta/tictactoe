@@ -8,5 +8,4 @@ export const matches = sqliteTable("matches", {
   winner: text("winner").notNull(),
 });
 
-
-export type MatchesType = InferModel<typeof matches>;
+export type Match = InferModel<typeof matches>;
